@@ -1,19 +1,32 @@
-//
-//  AppDelegate.swift
-//  Flash-Chat
-//
-//  Created by Admin on 07/10/2022.
-//
+
+//MARK: - Here we implemet FirebaseAuth, FirebaseCore, FirebaseFirestore, IQKeyboardManagerSwift, libraries with documentation.
 
 import UIKit
+import FirebaseAuth
+import FirebaseCore
+import FirebaseFirestore
+import IQKeyboardManagerSwift
 
-@main
+//MARK: - Here we put FirebaseApp.configure() with Firebase documentation, and create test FireBase database, and also set the IQKeyboardManagerSwift for keyboard, and set navigation bar.
+
+@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+          FirebaseApp.configure()
+          let db = Firestore.firestore()
+          print(db)
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+
+        let navigationBarAppearance = UINavigationBarAppearance()
+                      navigationBarAppearance.titleTextAttributes = [
+                        NSAttributedString.Key.foregroundColor : UIColor.white
+                      ]
+                      navigationBarAppearance.backgroundColor = UIColor(named: K.BrandColors.purple)
+                      UINavigationBar.appearance().standardAppearance = navigationBarAppearance
         return true
     }
 
@@ -31,6 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
+    
 }
 
