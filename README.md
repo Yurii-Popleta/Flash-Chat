@@ -4,6 +4,9 @@
 <img width="419" alt="Знімок екрана 2022-11-02 о 09 08 58" src="https://user-images.githubusercontent.com/109367230/199436984-545bc9ca-4459-4c12-8230-becb12b899f4.png">
 <img width="419" alt="Знімок екрана 2022-11-02 о 09 09 15" src="https://user-images.githubusercontent.com/109367230/199437005-efc372ac-17db-4bdc-8837-8f230c41b5de.png">
 
+<img width="710" alt="Знімок екрана 2022-11-02 о 09 51 14" src="https://user-images.githubusercontent.com/109367230/199447621-15231087-53f2-4029-aaa4-ce797f9305f2.png">
+
+
 ## Goal
 Creating chat app.
 
