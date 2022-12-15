@@ -1,4 +1,4 @@
- platform :ios, '13.0'
+ platform :ios, '12.0'
 
 target 'Flash-Chat' do
   use_frameworks!
@@ -7,5 +7,8 @@ target 'Flash-Chat' do
 
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
-  
+  pod 'FirebaseCore'
+  pod 'FBSDKLoginKit'
+  pod 'GoogleSignIn', '< 5.0.0'
+
 end

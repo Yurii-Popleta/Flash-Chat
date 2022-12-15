@@ -1,5 +1,6 @@
 
 import UIKit
+import FirebaseAuth
 
 class WelcomeViewController: UIViewController {
 
@@ -11,7 +12,6 @@ class WelcomeViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
     }
-
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false
@@ -31,6 +31,12 @@ class WelcomeViewController: UIViewController {
             }
             charIndex += 1
         }
+        validateAuth()
     }
-
+    
+    private func validateAuth() {
+        if Auth.auth().currentUser != nil {
+            self.performSegue(withIdentifier: "userAlreadyRegister", sender: self)
+        }
+    }
 }

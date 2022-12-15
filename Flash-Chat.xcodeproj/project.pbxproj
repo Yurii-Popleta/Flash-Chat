@@ -22,6 +22,9 @@
 		84629F3628F4651800A87014 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 84629F3528F4651800A87014 /* IQKeyboardManagerSwift */; };
 		84629F3928F4D08100A87014 /* MessageCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84629F3728F4D08100A87014 /* MessageCell2.swift */; };
 		84629F3A28F4D08100A87014 /* MessageCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84629F3828F4D08100A87014 /* MessageCell2.xib */; };
+		84787348293932370090FBE6 /* DatabaseManeger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84787347293932370090FBE6 /* DatabaseManeger.swift */; };
+		8478734A293B53A80090FBE6 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84787349293B53A80090FBE6 /* TabBarViewController.swift */; };
+		8478734C293B68B00090FBE6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478734B293B68B00090FBE6 /* ProfileViewController.swift */; };
 		84FCAB9C28F195AD00E7E905 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84FCAB9B28F195AD00E7E905 /* GoogleService-Info.plist */; };
 		DAD20B851E3A9E8CF1A80237 /* Pods_Flash_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5461346199FC2AD51E432F6 /* Pods_Flash_Chat.framework */; };
 /* End PBXBuildFile section */
@@ -43,6 +46,10 @@
 		8453F30A28F07E2300B8F7BA /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		84629F3728F4D08100A87014 /* MessageCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell2.swift; sourceTree = "<group>"; };
 		84629F3828F4D08100A87014 /* MessageCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageCell2.xib; sourceTree = "<group>"; };
+		84787347293932370090FBE6 /* DatabaseManeger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManeger.swift; sourceTree = "<group>"; };
+		84787349293B53A80090FBE6 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		8478734B293B68B00090FBE6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		8478734D293D49840090FBE6 /* Flash-Chat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Flash-Chat.entitlements"; sourceTree = "<group>"; };
 		84FCAB9B28F195AD00E7E905 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		87276ED124F7C28F916DE6AA /* Pods-Flash-Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flash-Chat.debug.xcconfig"; path = "Target Support Files/Pods-Flash-Chat/Pods-Flash-Chat.debug.xcconfig"; sourceTree = "<group>"; };
 		EA21BBF0F73C3CBEB73BC67D /* Pods-Flash-Chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flash-Chat.release.xcconfig"; path = "Target Support Files/Pods-Flash-Chat/Pods-Flash-Chat.release.xcconfig"; sourceTree = "<group>"; };
@@ -100,8 +107,10 @@
 		8453F2E428F07DAF00B8F7BA /* Flash-Chat */ = {
 			isa = PBXGroup;
 			children = (
+				8478734D293D49840090FBE6 /* Flash-Chat.entitlements */,
 				8453F30428F07E2200B8F7BA /* AppDelegate.swift */,
 				8453F30528F07E2200B8F7BA /* SceneDelegate.swift */,
+				84787347293932370090FBE6 /* DatabaseManeger.swift */,
 				8453F2FE28F07E1D00B8F7BA /* Assets.xcassets */,
 				8453F30028F07E1F00B8F7BA /* Model */,
 				8453F30628F07E2300B8F7BA /* Views */,
@@ -120,6 +129,8 @@
 				8453F2FD28F07E1900B8F7BA /* RegisterViewController.swift */,
 				8453F2FC28F07E1900B8F7BA /* LoginViewController.swift */,
 				8453F2FA28F07E1900B8F7BA /* ChatViewController.swift */,
+				84787349293B53A80090FBE6 /* TabBarViewController.swift */,
+				8478734B293B68B00090FBE6 /* ProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -156,6 +167,7 @@
 				8453F2DF28F07DAF00B8F7BA /* Frameworks */,
 				8453F2E028F07DAF00B8F7BA /* Resources */,
 				F1CB4644A8706ECBEC5C6328 /* [CP] Embed Pods Frameworks */,
+				A7775BDBFD6A014E6E8F9286 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -222,6 +234,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		A7775BDBFD6A014E6E8F9286 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Flash-Chat/Pods-Flash-Chat-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Flash-Chat/Pods-Flash-Chat-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Flash-Chat/Pods-Flash-Chat-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F1CB4644A8706ECBEC5C6328 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -271,11 +300,14 @@
 				8453F31028F07E2500B8F7BA /* LoginViewController.swift in Sources */,
 				8453F30E28F07E2500B8F7BA /* ChatViewController.swift in Sources */,
 				84629F3928F4D08100A87014 /* MessageCell2.swift in Sources */,
+				84787348293932370090FBE6 /* DatabaseManeger.swift in Sources */,
+				8478734A293B53A80090FBE6 /* TabBarViewController.swift in Sources */,
 				8453F31428F07E2500B8F7BA /* Message.swift in Sources */,
 				8453F30F28F07E2500B8F7BA /* WelcomeViewController.swift in Sources */,
 				8453F31728F07E2500B8F7BA /* AppDelegate.swift in Sources */,
 				8453F31128F07E2500B8F7BA /* RegisterViewController.swift in Sources */,
 				8453F31628F07E2500B8F7BA /* Constants.swift in Sources */,
+				8478734C293B68B00090FBE6 /* ProfileViewController.swift in Sources */,
 				8453F31828F07E2500B8F7BA /* SceneDelegate.swift in Sources */,
 				8453F31B28F07E2500B8F7BA /* MessageCell.swift in Sources */,
 			);
@@ -416,6 +448,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Flash-Chat/Flash-Chat.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G29RW88958;
@@ -427,7 +460,8 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -450,6 +484,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Flash-Chat/Flash-Chat.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G29RW88958;
@@ -461,7 +496,8 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

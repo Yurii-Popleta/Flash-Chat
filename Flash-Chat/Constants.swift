@@ -1,6 +1,8 @@
 
 //MARK: - Here we create a static constants because this a safe version of using strings keys.
 
+import UIKit
+
     struct K {
         static let appName = "⚡️FlashChat"
         static let cellIdentifier = "ReusableCell"
@@ -25,3 +27,6 @@
         }
     }
 
+extension Notification.Name {
+    static let didlogInNotification = Notification.Name("didlogInNotification")
+}

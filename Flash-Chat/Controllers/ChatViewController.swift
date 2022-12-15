@@ -5,11 +5,11 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
-class ChatViewController: UIViewController, UITableViewDelegate {
+ class ChatViewController: UIViewController, UITableViewDelegate {
 
    @IBOutlet weak var tableView: UITableView!
    @IBOutlet weak var messageTextfield: UITextField!
-
+     
 //MARK: - Here we create a new FireBase database and empty array where we will put users email and messages.
     
     let db = Firestore.firestore()
@@ -20,9 +20,9 @@ class ChatViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.navigationItem.hidesBackButton = true
         tableView.dataSource = self
         tableView.delegate = self
-        navigationItem.hidesBackButton = true
         title = K.appName
         navigationController!.navigationBar.tintColor = UIColor(named: K.BrandColors.lightPurple)
         tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
@@ -80,19 +80,6 @@ class ChatViewController: UIViewController, UITableViewDelegate {
                     self.messageTextfield.placeholder = "print something to send"
                 }
             }
-        }
-    }
-
-//MARK: - Here we log out user and move he on first welcome screen.
-    
-  @IBAction func logOutPressed(_ sender: UIBarButtonItem) {
-
-    do {
-      try Auth.auth().signOut()
-        navigationController?.popToRootViewController(animated: true)
-        
-    } catch let signOutError as NSError {
-      print("Error signing out: %@", signOutError)
         }
     }
 }
