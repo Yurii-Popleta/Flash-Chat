@@ -10,5 +10,11 @@ target 'Flash-Chat' do
   pod 'FirebaseCore'
   pod 'FBSDKLoginKit'
   pod 'GoogleSignIn', '< 5.0.0'
+  pod 'MessageKit'
+  pod 'JGProgressHUD'
+  pod 'RealmSwift'
+  pod 'SDWebImage'
+  pod 'FirebaseStorage'
+  pod 'FirebaseDatabase'
 
 end

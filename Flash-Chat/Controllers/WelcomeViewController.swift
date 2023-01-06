@@ -8,9 +8,12 @@ class WelcomeViewController: UIViewController {
     
     //MARK: - Here we turn off navigationController because we dont need this on this screen.
     
+    var trust = false
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
+        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -36,7 +39,16 @@ class WelcomeViewController: UIViewController {
     
     private func validateAuth() {
         if Auth.auth().currentUser != nil {
+            trust = true
             self.performSegue(withIdentifier: "userAlreadyRegister", sender: self)
         }
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        if trust {
+            self.navigationController!.navigationBar.isHidden = true
+        }
+    }
+    
 }

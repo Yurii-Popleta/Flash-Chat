@@ -29,4 +29,5 @@ import UIKit
 
 extension Notification.Name {
     static let didlogInNotification = Notification.Name("didlogInNotification")
+    static let pictureObserv = Notification.Name("pictureObserv")
 }

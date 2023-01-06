@@ -3,7 +3,7 @@
 
  import UIKit
  import FirebaseAuth
-
+ import JGProgressHUD
 class RegisterViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var userImage: UIImageView!
@@ -12,12 +12,19 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var passwordTextfield: UITextField!
     @IBOutlet weak var errorMassege: UILabel!
     
-    enum EnamCase {
-        case camera
-        case photoLibrary
-    }
+//    enum EnamCase {
+//        case camera
+//        case photoLibrary
+//    }
+    
+    private var truth = false
+    private let spinner = JGProgressHUD(style: .dark)
     
     //MARK: - Here we make our UINavigationBar without color and set the color for navigation buttons.
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController!.navigationBar.isHidden = false
+    }
     
     override func viewDidLoad() {
             super.viewDidLoad()
@@ -28,6 +35,13 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate {
         userImage.isUserInteractionEnabled = true
         userImage.addGestureRecognizer(tapGestureRecognizer)
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if truth {
+            navigationController!.navigationBar.isHidden = true
+        }
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
@@ -42,24 +56,48 @@ class RegisterViewController: UIViewController, UINavigationControllerDelegate {
     @IBAction func registerPressed(_ sender: UIButton) {
         print("work")
         if let email = emailTextfield.text, let password = passwordTextfield.text, let nikname = nikNmae.text {
-            
+            spinner.show(in: view)
             DatabaseManeger.share.validateNewUser(with: email) { exists in
                 print(exists)
                 guard exists == false else {
                     self.errorMassege.text = "this email already exist"
                     return
                 }
-                
+            
                 Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                   
                     if let e = error {
                         self.errorMassege.text = e.localizedDescription
                         self.passwordTextfield.text = ""
                         self.emailTextfield.text = ""
-                    } else if let result = authResult {
-                        DatabaseManeger.share.insertUser(with: DatabaseManeger.UserData(userNikName: nikname, userEmail: email))
-                        self.performSegue(withIdentifier: K.registerSegue, sender: self)
-                        print(result.user.email!)
-                        self.errorMassege.text = ""
+                    } else if authResult != nil {
+                        let userData = UserData(userNikName: nikname, userEmail: email)
+                        DatabaseManeger.share.insertUser(with: userData) { success in
+                            if success {
+                                //upload image
+                                guard let image = self.userImage.image, let data = image.pngData() else {
+                                    return
+                                }
+                                let fileName = userData.profilePictureFileName
+                                StorageManager.shared.uploadProfilePicture(with: data, filename: fileName) { result in
+                                    switch result {
+                                    case .success(let downloadUrl):
+                                        UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
+                                        print(downloadUrl)
+                                        self.truth = true
+                                        UserDefaults.standard.set(email, forKey: "email")
+                                        UserDefaults.standard.set(nikname, forKey: "name")
+                                        self.performSegue(withIdentifier: K.registerSegue, sender: self)
+                                        self.errorMassege.text = ""
+                                        DispatchQueue.main.async {
+                                            self.spinner.dismiss()
+                                        }
+                                    case .failure(let error):
+                                        print("Storage manager error \(error)")
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -90,7 +128,7 @@ extension RegisterViewController: UIImagePickerControllerDelegate {
 
         let picker = UIImagePickerController()
             picker.delegate = self
-        picker.allowsEditing = true
+            picker.allowsEditing = true
             picker.sourceType = enamCase
 
             present(picker, animated: true, completion: nil)
@@ -99,19 +137,21 @@ extension RegisterViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
 
-        let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
-        userImage.image = selectedImage
-        userImage.layer.borderWidth = 1
-        userImage.layer.masksToBounds = false
-        userImage.layer.borderColor = UIColor.lightGray.cgColor
-        userImage.layer.cornerRadius = userImage.frame.height/2
-        userImage.clipsToBounds = true
-
-            self.userImage.frame.origin.y -= 250
-            UIView.animate(withDuration: 2, animations: {
-                self.userImage.frame.origin.y += 250
-            }, completion: nil)
-    
+        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            userImage.image = selectedImage
+            userImage.layer.cornerRadius = userImage.frame.width/2
+            userImage.layer.borderWidth = 1
+            userImage.layer.masksToBounds = false
+            userImage.layer.borderColor = UIColor.lightGray.cgColor
+            userImage.clipsToBounds = true
+            
+            DispatchQueue.main.async {
+                self.userImage.frame.origin.y -= 250
+                UIView.animate(withDuration: 2, animations: {
+                    self.userImage.frame.origin.y += 250
+                }, completion: nil)
+            }
+         }
       }
 
 

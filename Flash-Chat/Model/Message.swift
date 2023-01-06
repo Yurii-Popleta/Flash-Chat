@@ -3,7 +3,7 @@
 
 import Foundation
 
-struct Message {
+struct Messages {
     let sender: String
     let body: String
 }

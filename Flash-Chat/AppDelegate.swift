@@ -6,9 +6,10 @@ import UIKit
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
-import IQKeyboardManagerSwift
+//import IQKeyboardManagerSwift
 import FBSDKCoreKit
 import GoogleSignIn
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -22,9 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     let db = Firestore.firestore()
     print(db)
-  IQKeyboardManager.shared.enable = true
-  IQKeyboardManager.shared.enableAutoToolbar = false
-  IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+//  IQKeyboardManager.shared.enable = true
+//  IQKeyboardManager.shared.enableAutoToolbar = false
+//  IQKeyboardManager.shared.shouldResignOnTouchOutside = true
 
   let navigationBarAppearance = UINavigationBarAppearance()
                 navigationBarAppearance.titleTextAttributes = [
@@ -72,9 +73,45 @@ func application(
         
         guard let email = user.profile.email, let nikname = user.profile.name else { return }
         
+        UserDefaults.standard.set(email, forKey: "email")
+        UserDefaults.standard.set(nikname, forKey: "name")
+        
         DatabaseManeger.share.validateNewUser(with: email) { exist in
             if !exist {
-                DatabaseManeger.share.insertUser(with: DatabaseManeger.UserData(userNikName: nikname, userEmail: email))
+                let userData = UserData(userNikName: nikname, userEmail: email)
+                DatabaseManeger.share.insertUser(with: userData) { success in
+                    if success {
+                        //upload image
+                        
+                        if user.profile.hasImage {
+                            guard let url = user.profile.imageURL(withDimension: 200) else {
+                                return
+                            }
+                            
+                            URLSession.shared.dataTask(with: url) { data, _, error in
+                                guard let data = data else {
+                                    print("failed to get data from facebook ")
+                                    return
+                                }
+                                
+                                print("got data from facebook uploading... ")
+                                
+                                let fileName = userData.profilePictureFileName
+                                StorageManager.shared.uploadProfilePicture(with: data, filename: fileName) { result in
+                                    switch result {
+                                    case .success(let downloadUrl):
+                                        UserDefaults.standard.set(downloadUrl, forKey: "profile_picture_url")
+                                        print(downloadUrl)
+                                    case .failure(let error):
+                                        print("Storage manager error \(error)")
+                                    }
+                                }
+                            }.resume()
+                        } else {
+                            print("there no user image from google")
+                        }
+                    }
+                }
             }
         }
         
@@ -90,6 +127,8 @@ func application(
                 print("failed with google login credential")
                 return
             }
+            
+           
             
             print("sucessfully sing in with google")
             NotificationCenter.default.post(name: .didlogInNotification, object: nil)
