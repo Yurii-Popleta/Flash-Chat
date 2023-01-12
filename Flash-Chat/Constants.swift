@@ -4,7 +4,7 @@
 import UIKit
 
     struct K {
-        static let appName = "⚡️FlashChat"
+        static let appName = "⚡️FlashChat⚡️"
         static let cellIdentifier = "ReusableCell"
         static let secondCellIdentifire = "ReusableCell2"
         static let cellNibName = "MessageCell"
@@ -31,3 +31,5 @@ extension Notification.Name {
     static let didlogInNotification = Notification.Name("didlogInNotification")
     static let pictureObserv = Notification.Name("pictureObserv")
 }
+
+

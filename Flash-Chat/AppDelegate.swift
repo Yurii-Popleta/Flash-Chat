@@ -78,6 +78,7 @@ func application(
         
         DatabaseManeger.share.validateNewUser(with: email) { exist in
             if !exist {
+                print("email dosnt exists!!!")
                 let userData = UserData(userNikName: nikname, userEmail: email)
                 DatabaseManeger.share.insertUser(with: userData) { success in
                     if success {
@@ -112,6 +113,8 @@ func application(
                         }
                     }
                 }
+            } else {
+                print("email exists!!")
             }
         }
         

@@ -23,5 +23,4 @@ class MessageCell2: UITableViewCell {
         // Configure the view for the selected state
     }
   
-    
 }

@@ -7,6 +7,8 @@ final class StorageManager {
     
     static let shared = StorageManager()
     
+    let metadata = StorageMetadata()
+    
     private let storage = Storage.storage().reference()
     
     public typealias UploadPictureCompletion = (Result<String, Error>) -> Void
@@ -37,14 +39,14 @@ final class StorageManager {
     /// upload image that will be send in a conversation message
     public func uploadMessagePhoto(with data: Data, filename: String, completion: @escaping UploadPictureCompletion) {
         
-        storage.child("message_images/\(filename)").putData(data, metadata: nil) { metaData, error in
+        storage.child("message_images/\(filename)").putData(data, metadata: nil) { [weak self] metaData, error in
             guard error == nil else {
                 //failed
                 print("failed to upload data to firebase to picture")
                 completion(.failure(StorageErrors.failedToUpload))
                 return
          }
-            self.storage.child("message_images/\(filename)").downloadURL { url, error in
+            self?.storage.child("message_images/\(filename)").downloadURL { url, error in
                 guard let url = url else {
                     //failed
                     print("failed to get download url")
@@ -54,6 +56,32 @@ final class StorageManager {
                 let urlString = url.absoluteString
                 print("download url returned \(urlString)")
                 completion(.success(urlString))
+            }
+        }
+    }
+    /// upload video that will be send in a conversation message
+    public func uploadMessageVideo(with fileUrl: URL, filename: String, completion: @escaping UploadPictureCompletion) {
+        
+        metadata.contentType = "video/quicktime"
+        if let videoData = NSData(contentsOf: fileUrl) as Data? {
+            storage.child("message_videos/\(filename)").putData(videoData, metadata: nil) { [weak self] metaData, error in
+                guard error == nil else {
+                    //failed
+                    print("failed to upload video file to firebase to picture")
+                    completion(.failure(StorageErrors.failedToUpload))
+                    return
+             }
+                self?.storage.child("message_videos/\(filename)").downloadURL { url, error in
+                    guard let url = url else {
+                        //failed
+                        print("failed to get download url")
+                        completion(.failure(StorageErrors.failedToGetDownloadUrl))
+                        return
+                      }
+                    let urlString = url.absoluteString
+                    print("download url returned \(urlString)")
+                    completion(.success(urlString))
+                }
             }
         }
     }

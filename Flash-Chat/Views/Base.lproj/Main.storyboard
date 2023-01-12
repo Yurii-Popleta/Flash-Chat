@@ -32,15 +32,6 @@
                                     <segue destination="5v2-hE-4Ub" kind="show" id="6IZ-Le-ZFd"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚡️FlashChat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="y7D-jv-BlJ">
-                                <rect key="frame" x="52" y="376" width="271" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="ph1-wX-D3a"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="50"/>
-                                <color key="textColor" name="BrandBlue"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h2x-tz-C9Y">
                                 <rect key="frame" x="0.0" y="661" width="375" height="48"/>
                                 <color key="backgroundColor" name="BrandLightBlue"/>
@@ -56,13 +47,26 @@
                                     <segue destination="BYZ-38-t0r" kind="show" id="wTP-Qr-mFZ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FlashChat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="y7D-jv-BlJ">
+                                <rect key="frame" x="52" y="381.66666666666669" width="271" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="jSK-VS-BI1"/>
+                                    <constraint firstAttribute="width" constant="271" id="mRd-VP-gQ5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="41"/>
+                                <color key="textColor" name="BrandBlue"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="w0w-hE-MVy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="dWe-nW-2HB" firstAttribute="trailing" secondItem="w0w-hE-MVy" secondAttribute="trailing" id="7Vx-Xq-VaO"/>
+                            <constraint firstItem="y7D-jv-BlJ" firstAttribute="centerX" secondItem="H86-OM-sMN" secondAttribute="centerX" id="912-Z6-COX"/>
                             <constraint firstItem="dWe-nW-2HB" firstAttribute="leading" secondItem="w0w-hE-MVy" secondAttribute="leading" id="Ag7-Hh-D9X"/>
+                            <constraint firstItem="y7D-jv-BlJ" firstAttribute="centerX" secondItem="H86-OM-sMN" secondAttribute="centerX" id="Cez-pj-OOF"/>
                             <constraint firstItem="y7D-jv-BlJ" firstAttribute="centerY" secondItem="H86-OM-sMN" secondAttribute="centerY" id="Ipj-e5-54T"/>
+                            <constraint firstItem="y7D-jv-BlJ" firstAttribute="centerX" secondItem="H86-OM-sMN" secondAttribute="centerX" id="NBo-Y5-ES2"/>
                             <constraint firstItem="dWe-nW-2HB" firstAttribute="bottom" secondItem="w0w-hE-MVy" secondAttribute="bottom" id="ZsM-5p-lNb"/>
                             <constraint firstItem="dWe-nW-2HB" firstAttribute="top" secondItem="h2x-tz-C9Y" secondAttribute="bottom" constant="8" id="cnI-Zh-aEc"/>
                             <constraint firstItem="w0w-hE-MVy" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="y7D-jv-BlJ" secondAttribute="trailing" id="eaW-iX-nU1"/>
@@ -70,6 +74,7 @@
                             <constraint firstItem="h2x-tz-C9Y" firstAttribute="trailing" secondItem="w0w-hE-MVy" secondAttribute="trailing" id="sNZ-Ul-l2q"/>
                             <constraint firstItem="h2x-tz-C9Y" firstAttribute="leading" secondItem="w0w-hE-MVy" secondAttribute="leading" id="tLN-qz-xiG"/>
                             <constraint firstItem="y7D-jv-BlJ" firstAttribute="centerX" secondItem="H86-OM-sMN" secondAttribute="centerX" id="vNd-pq-rnh"/>
+                            <constraint firstItem="y7D-jv-BlJ" firstAttribute="centerX" secondItem="H86-OM-sMN" secondAttribute="centerX" id="xTf-lM-qAZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="YRD-CW-OWh"/>
@@ -80,7 +85,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X0w-oB-wTX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="823.1884057971015" y="134.59821428571428"/>
+            <point key="canvasLocation" x="821.60000000000002" y="134.48275862068965"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -486,11 +491,35 @@
                                     <constraint firstAttribute="height" constant="139" id="xiw-hl-djS"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDy-x5-uNN">
+                                <rect key="frame" x="0.0" y="238" width="375" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="q8Q-N0-OXV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHz-UP-7r0">
+                                <rect key="frame" x="0.0" y="290" width="375" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="JML-lo-Mbp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JKx-7M-oeR"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="RHz-UP-7r0" firstAttribute="top" secondItem="PDy-x5-uNN" secondAttribute="bottom" id="6TV-IU-gpw"/>
+                            <constraint firstItem="JKx-7M-oeR" firstAttribute="trailing" secondItem="PDy-x5-uNN" secondAttribute="trailing" id="JMO-uv-ghb"/>
                             <constraint firstItem="88V-8U-Ccc" firstAttribute="centerX" secondItem="aQy-2e-8fV" secondAttribute="centerX" id="MY7-C2-szr"/>
+                            <constraint firstItem="PDy-x5-uNN" firstAttribute="leading" secondItem="JKx-7M-oeR" secondAttribute="leading" id="OEX-WU-tPM"/>
+                            <constraint firstItem="RHz-UP-7r0" firstAttribute="trailing" secondItem="JKx-7M-oeR" secondAttribute="trailing" id="SE9-Ia-I9h"/>
+                            <constraint firstItem="PDy-x5-uNN" firstAttribute="top" secondItem="88V-8U-Ccc" secondAttribute="bottom" constant="8" id="UbN-7E-MGW"/>
+                            <constraint firstItem="RHz-UP-7r0" firstAttribute="leading" secondItem="JKx-7M-oeR" secondAttribute="leading" id="kYL-Tz-57c"/>
                             <constraint firstItem="88V-8U-Ccc" firstAttribute="top" secondItem="JKx-7M-oeR" secondAttribute="top" id="mLe-UM-eEl"/>
                         </constraints>
                     </view>
@@ -504,7 +533,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="nikName" destination="PDy-x5-uNN" id="eya-Df-BoR"/>
                         <outlet property="profileImage" destination="88V-8U-Ccc" id="IZJ-xN-lcj"/>
+                        <outlet property="userEmail" destination="RHz-UP-7r0" id="mdv-y1-M9A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ht1-rZ-JTe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -584,7 +615,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Xet-Ex-6E6"/>
+        <segue reference="bHJ-Gg-9Et"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="BrandLightPurple"/>
     <resources>

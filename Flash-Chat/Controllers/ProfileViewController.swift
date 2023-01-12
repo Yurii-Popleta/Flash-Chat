@@ -3,15 +3,19 @@ import UIKit
 import FirebaseAuth
 import FBSDKLoginKit
 import GoogleSignIn
+import SDWebImage
 
 
 class ProfileViewController: UIViewController {
   
     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var nikName: UILabel!
+    @IBOutlet weak var userEmail: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        nikName.text = UserDefaults.standard.value(forKey: "name") as? String ?? "no name"
+        userEmail.text = UserDefaults.standard.value(forKey: "email") as? String ?? "no email"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(LogoutTapped))
         navigationItem.rightBarButtonItem?.tintColor = .black
         createImage()
@@ -25,29 +29,17 @@ class ProfileViewController: UIViewController {
         let safeEmail = DatabaseManeger.safeEmail(emailAdres: email)
         let fileName = safeEmail + "_profile_picture.png"
         let path = "images/" + fileName
-
+        
         StorageManager.shared.downloadUrl(for: path) { results in
             switch results {
             case .success(let url):
-                self.downloadImage(imageView: self.profileImage, url: url)
+                self.profileImage.sd_setImage(with: url)
                 print("successful dowload image here")
             case .failure(let error):
                 print("error to download image \(error)")
-               // print(UserDefaults.standard.value(forKey: "profile_picture_url") as! String)
+                // print(UserDefaults.standard.value(forKey: "profile_picture_url") as! String)
             }
         }
-    }
-
-
-    func downloadImage(imageView: UIImageView, url: URL) {
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            DispatchQueue.main.async {
-                imageView.image = UIImage(data: data)
-            }
-        }.resume()
     }
     
     @objc func LogoutTapped() {

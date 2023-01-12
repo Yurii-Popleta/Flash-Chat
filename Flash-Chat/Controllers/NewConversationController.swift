@@ -1,19 +1,13 @@
-//
-//  NewConversationController.swift
-//  Flash-Chat
-//
-//  Created by Admin on 16/12/2022.
-//
 
 import UIKit
 import JGProgressHUD
 
 class NewConversationController: UIViewController {
 
-    public var completion: (([String: String]) -> Void)?
+    public var completion: ((SearchResult) -> Void)?
     private let spinner = JGProgressHUD(style: .dark)
     private var allusers = [[String: String]]()
-    private var resultsOfUsers = [[String: String]]()
+    private var resultsOfUsers = [SearchResult]()
     private var hasFetched = false
     
     private let searchBar: UISearchBar = {
@@ -25,7 +19,7 @@ class NewConversationController: UIViewController {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.isHidden = true
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(NewConversationCell.self, forCellReuseIdentifier: NewConversationCell.identifier)
         return tableView
     }()
     
@@ -45,7 +39,7 @@ class NewConversationController: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         searchBar.delegate = self
         navigationController?.navigationBar.topItem?.titleView = searchBar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(dismissSelf))
@@ -70,8 +64,9 @@ extension NewConversationController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = resultsOfUsers[indexPath.row]["name"]
+        let model = resultsOfUsers[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewConversationCell.identifier, for: indexPath) as! NewConversationCell
+        cell.configure(with: model)
         return cell
     }
     
@@ -81,6 +76,10 @@ extension NewConversationController: UITableViewDelegate, UITableViewDataSource 
         dismiss(animated: true) { [weak self] in
             self?.completion?(targetUser)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
     }
 }
 
@@ -115,15 +114,26 @@ extension NewConversationController: UISearchBarDelegate  {
     }
     
     func filterUsers(with term: String) {
-        guard hasFetched else {
+        guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String, hasFetched else {
             return
         }
+        
         spinner.dismiss()
-        var results: [[String: String]] = allusers.filter { result in
+        let results: [SearchResult] = allusers.filter { result in
+            guard let email = result["email"], email != currentUserEmail else {
+                return false
+            }
+            
             guard let name = result["name"]?.lowercased() else {
                 return false
             }
             return name.hasPrefix(term.lowercased())
+        }.compactMap { result in
+            guard let email = result["email"], let name = result["name"] else {
+                return nil
+            }
+            
+            return SearchResult(name: name, email: email)
         }
         resultsOfUsers = results
         updateUI()
@@ -140,4 +150,9 @@ extension NewConversationController: UISearchBarDelegate  {
         }
     }
     
+}
+
+struct SearchResult {
+    let name: String
+    let email: String
 }

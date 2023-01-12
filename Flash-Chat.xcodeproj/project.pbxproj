@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84192FBC296F241100FB89B8 /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84192FBB296F241100FB89B8 /* LocationPickerViewController.swift */; };
+		843F67512969C74A005E18EC /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F67502969C74A005E18EC /* PhotoViewerViewController.swift */; };
+		843F6753296B21AF005E18EC /* NewConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F6752296B21AF005E18EC /* NewConversationCell.swift */; };
 		8453AEEB29505D680082AA30 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453AEEA29505D680082AA30 /* StorageManager.swift */; };
 		8453F30E28F07E2500B8F7BA /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453F2FA28F07E1900B8F7BA /* ConversationViewController.swift */; };
 		8453F30F28F07E2500B8F7BA /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453F2FB28F07E1900B8F7BA /* WelcomeViewController.swift */; };
@@ -17,9 +20,9 @@
 		8453F31628F07E2500B8F7BA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453F30328F07E2100B8F7BA /* Constants.swift */; };
 		8453F31728F07E2500B8F7BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453F30428F07E2200B8F7BA /* AppDelegate.swift */; };
 		8453F31828F07E2500B8F7BA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453F30528F07E2200B8F7BA /* SceneDelegate.swift */; };
-		8453F31928F07E2500B8F7BA /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8453F30728F07E2300B8F7BA /* MessageCell.xib */; };
+		8453F31928F07E2500B8F7BA /* Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8453F30728F07E2300B8F7BA /* Cell.xib */; };
 		8453F31A28F07E2500B8F7BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8453F30828F07E2300B8F7BA /* Main.storyboard */; };
-		8453F31B28F07E2500B8F7BA /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453F30A28F07E2300B8F7BA /* MessageCell.swift */; };
+		8453F31B28F07E2500B8F7BA /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453F30A28F07E2300B8F7BA /* Cell.swift */; };
 		84629F3628F4651800A87014 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 84629F3528F4651800A87014 /* IQKeyboardManagerSwift */; };
 		84629F3928F4D08100A87014 /* MessageCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84629F3728F4D08100A87014 /* MessageCell2.swift */; };
 		84629F3A28F4D08100A87014 /* MessageCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84629F3828F4D08100A87014 /* MessageCell2.xib */; };
@@ -33,6 +36,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		84192FBB296F241100FB89B8 /* LocationPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
+		843F67502969C74A005E18EC /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
+		843F6752296B21AF005E18EC /* NewConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationCell.swift; sourceTree = "<group>"; };
 		8453AEEA29505D680082AA30 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		8453F2E228F07DAF00B8F7BA /* Flash-Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flash-Chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8453F2FA28F07E1900B8F7BA /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
@@ -45,9 +51,9 @@
 		8453F30328F07E2100B8F7BA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8453F30428F07E2200B8F7BA /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8453F30528F07E2200B8F7BA /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8453F30728F07E2300B8F7BA /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
+		8453F30728F07E2300B8F7BA /* Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell.xib; sourceTree = "<group>"; };
 		8453F30928F07E2300B8F7BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8453F30A28F07E2300B8F7BA /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		8453F30A28F07E2300B8F7BA /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		84629F3728F4D08100A87014 /* MessageCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell2.swift; sourceTree = "<group>"; };
 		84629F3828F4D08100A87014 /* MessageCell2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageCell2.xib; sourceTree = "<group>"; };
 		84787347293932370090FBE6 /* DatabaseManeger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManeger.swift; sourceTree = "<group>"; };
@@ -140,6 +146,9 @@
 				8478734B293B68B00090FBE6 /* ProfileViewController.swift */,
 				84883489294CA89C00E0FB61 /* ChattViewController.swift */,
 				8488348B294D1BAB00E0FB61 /* NewConversationController.swift */,
+				843F67502969C74A005E18EC /* PhotoViewerViewController.swift */,
+				843F6752296B21AF005E18EC /* NewConversationCell.swift */,
+				84192FBB296F241100FB89B8 /* LocationPickerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -156,8 +165,8 @@
 			isa = PBXGroup;
 			children = (
 				8453F30828F07E2300B8F7BA /* Main.storyboard */,
-				8453F30728F07E2300B8F7BA /* MessageCell.xib */,
-				8453F30A28F07E2300B8F7BA /* MessageCell.swift */,
+				8453F30728F07E2300B8F7BA /* Cell.xib */,
+				8453F30A28F07E2300B8F7BA /* Cell.swift */,
 				84629F3828F4D08100A87014 /* MessageCell2.xib */,
 				84629F3728F4D08100A87014 /* MessageCell2.swift */,
 			);
@@ -234,7 +243,7 @@
 			files = (
 				84629F3A28F4D08100A87014 /* MessageCell2.xib in Resources */,
 				8453F31A28F07E2500B8F7BA /* Main.storyboard in Resources */,
-				8453F31928F07E2500B8F7BA /* MessageCell.xib in Resources */,
+				8453F31928F07E2500B8F7BA /* Cell.xib in Resources */,
 				84FCAB9C28F195AD00E7E905 /* GoogleService-Info.plist in Resources */,
 				8453F31228F07E2500B8F7BA /* Assets.xcassets in Resources */,
 			);
@@ -311,16 +320,19 @@
 				8488348C294D1BAB00E0FB61 /* NewConversationController.swift in Sources */,
 				84629F3928F4D08100A87014 /* MessageCell2.swift in Sources */,
 				84787348293932370090FBE6 /* DatabaseManeger.swift in Sources */,
+				843F67512969C74A005E18EC /* PhotoViewerViewController.swift in Sources */,
 				8478734A293B53A80090FBE6 /* TabBarViewController.swift in Sources */,
+				843F6753296B21AF005E18EC /* NewConversationCell.swift in Sources */,
 				8453F31428F07E2500B8F7BA /* Message.swift in Sources */,
 				8453F30F28F07E2500B8F7BA /* WelcomeViewController.swift in Sources */,
 				8453F31728F07E2500B8F7BA /* AppDelegate.swift in Sources */,
+				84192FBC296F241100FB89B8 /* LocationPickerViewController.swift in Sources */,
 				8453F31128F07E2500B8F7BA /* RegisterViewController.swift in Sources */,
 				8453F31628F07E2500B8F7BA /* Constants.swift in Sources */,
 				8478734C293B68B00090FBE6 /* ProfileViewController.swift in Sources */,
 				8488348A294CA89C00E0FB61 /* ChattViewController.swift in Sources */,
 				8453F31828F07E2500B8F7BA /* SceneDelegate.swift in Sources */,
-				8453F31B28F07E2500B8F7BA /* MessageCell.swift in Sources */,
+				8453F31B28F07E2500B8F7BA /* Cell.swift in Sources */,
 				8453AEEB29505D680082AA30 /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

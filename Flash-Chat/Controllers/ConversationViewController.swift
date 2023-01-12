@@ -39,6 +39,8 @@ class ConversationController: UIViewController {
     
     //MARK: - Here we indications who is delegate for tableView and who is data source for tableView, also we turn off back button, set a title, set a color for logout button and register our two custom cells.
     
+    private var loginObserver: NSObjectProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //  tableView.isHidden = true
@@ -54,27 +56,65 @@ class ConversationController: UIViewController {
         tableView.allowsSelection = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(didTapComposeButton))
         startListeningForConversations()
+        
+        loginObserver = NotificationCenter.default.addObserver(forName: .didlogInNotification, object: nil, queue: .main) { [weak self] _ in
+           guard let strongSelf = self else {
+               return
+           }
+            strongSelf.startListeningForConversations()
+        }
     }
     
     @objc private func didTapComposeButton() {
         let vc = NewConversationController()
         vc.completion = { [weak self] results in
-            print("\(results)")
-            self?.createNewConversation(result: results)
+            guard let strongSelf = self else {
+                return
+            }
+            let currentConversations = strongSelf.conversations
+            
+            if let targetConversation = currentConversations.first(where: { conversation in
+                conversation.otherUserEmail == DatabaseManeger.safeEmail(emailAdres: results.email)
+            }) {
+                let vc = ChattViewController(with: targetConversation.otherUserEmail, id: targetConversation.id)
+                vc.isNewConversation = false
+                vc.title = targetConversation.name
+                vc.navigationItem.largeTitleDisplayMode = .never
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                print("\(results)")
+                strongSelf.createNewConversation(result: results)
+            }
         }
         let navVc = UINavigationController(rootViewController: vc)
         present(navVc, animated: true)
     }
     
-    private func createNewConversation(result: [String: String]) {
-        guard let name = result["name"], let email = result["email"] else {
-            return
-        }
+    private func createNewConversation(result: SearchResult) {
+        let name = result.name
+        let email = result.email
         let safeEmail = DatabaseManeger.safeEmail(emailAdres: email)
-        let vc = ChattViewController(with: safeEmail, id: nil)
-        vc.isNewConversation = true
-        vc.title = name
-        navigationController?.pushViewController(vc, animated: true)
+        //check in database if conversations with this two users exists
+        //if it does reuse conversation id
+        //otherwise use existing code
+        
+        DatabaseManeger.share.conversationExist(with: email) { [weak self] results in
+            guard let strongSelf = self else {
+                return
+            }
+            switch results {
+            case .success(let conversationId):
+                let vc = ChattViewController(with: safeEmail, id: conversationId)
+                vc.isNewConversation = false
+                vc.title = name
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
+            case .failure(_):
+                 let vc = ChattViewController(with: safeEmail, id: nil)
+                 vc.isNewConversation = true
+                 vc.title = name
+                 strongSelf.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -88,6 +128,11 @@ class ConversationController: UIViewController {
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else  {
             return
         }
+        
+        if let observer = loginObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
+        
         let safeEmail = DatabaseManeger.safeEmail(emailAdres: email)
         DatabaseManeger.share.getAllConversation(for: safeEmail) { [weak self] results in
             switch results {
@@ -155,10 +200,33 @@ extension ConversationController: UITableViewDataSource, UITableViewDelegate {
           func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
              tableView.deselectRow(at: indexPath, animated: true)
               let model = conversations[indexPath.row]
-              let vc = ChattViewController(with: model.otherUserEmail, id: model.id)
-              if let curentcell = tableView.cellForRow(at: indexPath) as? MessageCell2 {
-                  vc.title = model.name
-                  navigationController?.pushViewController(vc, animated: true)
+             openConversation(model)
+    }
+    
+    func openConversation(_ model: Conversation) {
+        let vc = ChattViewController(with: model.otherUserEmail, id: model.id)
+        vc.title = model.name
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            //begin delete
+            let conversationId = conversations[indexPath.row].id
+            tableView.beginUpdates()
+            DatabaseManeger.share.deleteConversation(conversationId: conversationId) { [weak self] success in
+                if success {
+                    self?.conversations.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .left)
+                }
+            }
+            tableView.endUpdates()
         }
     }
 }

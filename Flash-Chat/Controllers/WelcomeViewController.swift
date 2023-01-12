@@ -14,27 +14,33 @@ class WelcomeViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
         
+        titleLabel.text = ""
+        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = false
     }
     
-    //MARK: - Here we create welcome text animation, that looks like typing text.
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        titleLabel.text = ""
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         var charIndex = 0.0
         
         let titleText = K.appName
         for letter in titleText {
-            Timer.scheduledTimer(withTimeInterval: 0.1 * charIndex, repeats: false) { timer in
+            Timer.scheduledTimer(withTimeInterval: 0.15 * charIndex, repeats: false) { timer in
                 self.titleLabel.text?.append(letter)
             }
             charIndex += 1
         }
         validateAuth()
+    }
+    
+    //MARK: - Here we create welcome text animation, that looks like typing text.
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+  
     }
     
     private func validateAuth() {
